@@ -10,7 +10,7 @@ function Signup() {
 
   const handleSignup = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post(" https://blog-backend-p4he.onrender.com/api/auth/register", {
         name,
         email,
         password,

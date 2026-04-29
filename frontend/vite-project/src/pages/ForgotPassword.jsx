@@ -8,7 +8,7 @@ function ForgotPassword() {
 
   const handleReset = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/forgot-password", {
+      await axios.post(" https://blog-backend-p4he.onrender.com/api/auth/forgot-password", {
         email,
         newPassword,
       });

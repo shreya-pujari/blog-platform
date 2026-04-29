@@ -17,7 +17,7 @@ function CreateBlog() {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "http://localhost:5000/api/blog/create",
+        " https://blog-backend-p4he.onrender.com/api/blog/create",
         { title, content, author },
         {
           headers: {

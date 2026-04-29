@@ -20,7 +20,7 @@ function Dashboard() {
 
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/blog");
+      const res = await axios.get(" https://blog-backend-p4he.onrender.com/api/blog");
       setBlogs(res.data);
     } catch (err) {
       console.log(err);
@@ -31,7 +31,7 @@ function Dashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(`http://localhost:5000/api/blog/${id}`, {
+      await axios.delete(` https://blog-backend-p4he.onrender.com/api/blog/${id}`, {
         headers: { Authorization: "Bearer " + token },
       });
 
@@ -53,7 +53,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/blog/${editingBlog}`,
+        ` https://blog-backend-p4he.onrender.com/api/blog/${editingBlog}`,
         { title: newTitle, content: newContent },
         { headers: { Authorization: "Bearer " + token } }
       );
