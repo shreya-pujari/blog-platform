@@ -3,6 +3,8 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
+import CreateBlog from "./pages/CreateBlog";
+import ViewBlogs from "./pages/ViewBlogs";
 import "./index.css";
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         {view === "signup" && <Signup setView={setView} />}
         {view === "forgot" && <ForgotPassword setView={setView} />}
         {view === "dashboard" && <Dashboard setView={setView} />}
+        {view === "create" && <CreateBlog setView={setView} />}
+        {view === "blogs" && <ViewBlogs setView={setView} />}
       </div>
     </div>
   );
