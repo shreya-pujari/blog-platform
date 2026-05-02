@@ -15,15 +15,16 @@ function ForgotPassword({ setView }) {
     e.preventDefault();
 
     try {
-      await axios.post(
+      const res = await axios.post(
         "https://blog-backend-p4he.onrender.com/api/auth/reset-password",
         formData
       );
-      alert("Password updated successfully ✅");
+
+      alert(res.data.message || "Password updated ✅");
       setView("login");
     } catch (error) {
       console.error(error);
-      alert("Error updating password ❌");
+      alert("Reset failed ❌");
     }
   };
 
@@ -56,3 +57,4 @@ function ForgotPassword({ setView }) {
 }
 
 export default ForgotPassword;
+

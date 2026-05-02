@@ -19,7 +19,9 @@ function Login({ setView }) {
         "https://blog-backend-p4he.onrender.com/api/auth/login",
         formData
       );
+
       alert("Login successful ✅");
+      setView("dashboard");   // 🔥 THIS IS NEW
     } catch (error) {
       alert("Login failed ❌");
     }

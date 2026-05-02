@@ -1,60 +1,62 @@
 body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(to right, #667eea, #764ba2);
+  padding: 0;
 }
 
+/* Main container */
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 80px;
+  text-align: center;
+  margin-top: 50px;
 }
 
+/* Title */
 .title {
   color: white;
   margin-bottom: 20px;
 }
 
+/* Card */
 .card {
   background: white;
   padding: 30px;
-  border-radius: 15px;
-  width: 320px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  width: 300px;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form input {
+/* Form inputs */
+input {
+  display: block;
   width: 100%;
-  margin-bottom: 12px;
+  margin: 10px 0;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-.form button {
+/* Buttons */
+button {
   width: 100%;
   padding: 10px;
+  margin-top: 12px;   /* 🔥 spacing between buttons */
+  border: none;
+  border-radius: 5px;
   background: #667eea;
   color: white;
-  border: none;
-  border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.form button:hover {
+button:hover {
   background: #5a67d8;
 }
 
+/* Links */
 .link {
-  margin-top: 10px;
-  text-align: center;
   color: #667eea;
   cursor: pointer;
-  font-size: 14px;
+  margin-top: 10px;
 }
