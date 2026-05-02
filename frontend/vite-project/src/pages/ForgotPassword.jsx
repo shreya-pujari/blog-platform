@@ -1,62 +1,57 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-function ForgotPassword() {
-  const [email, setEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+function ForgotPassword({ setView }) {
+  const [formData, setFormData] = useState({
+    email: "",
+    newPassword: "",
+  });
 
-  const handleReset = async () => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      await axios.post(" https://blog-backend-p4he.onrender.com/api/auth/forgot-password", {
-        email,
-        newPassword,
-      });
-
-      alert("Password updated successfully");
-    } catch (err) {
-      alert("Error resetting password");
-      console.log(err);
+      await axios.post(
+        "https://blog-backend-p4he.onrender.com/api/auth/reset-password",
+        formData
+      );
+      alert("Password updated successfully ✅");
+      setView("login");
+    } catch (error) {
+      console.error(error);
+      alert("Error updating password ❌");
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-pink-500 to-red-500">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-80">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Reset Password
-        </h2>
+    <form onSubmit={handleSubmit} className="form">
+      <h2>Reset Password</h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <input
+        name="email"
+        placeholder="Enter your email"
+        onChange={handleChange}
+        required
+      />
 
-        <input
-          type="password"
-          placeholder="New Password"
-          className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
+      <input
+        name="newPassword"
+        type="password"
+        placeholder="New Password"
+        onChange={handleChange}
+        required
+      />
 
-        <button
-          onClick={handleReset}
-          className="w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600 transition"
-        >
-          Reset Password
-        </button>
+      <button type="submit">Update Password</button>
 
-        <p className="text-sm text-center mt-4">
-          <Link to="/login" className="text-pink-500 hover:underline">
-            Back to Login
-          </Link>
-        </p>
-      </div>
-    </div>
+      <p className="link" onClick={() => setView("login")}>
+        Back to Login
+      </p>
+    </form>
   );
 }
 

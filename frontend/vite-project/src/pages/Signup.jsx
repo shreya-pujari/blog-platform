@@ -1,73 +1,46 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
 
-function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+function Signup({ setView }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSignup = async () => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      await axios.post(" https://blog-backend-p4he.onrender.com/api/auth/register", {
-        name,
-        email,
-        password,
-      });
-
-      alert("Signup successful");
-      navigate("/login");
-    } catch (err) {
-      alert("Error signing up");
-      console.log(err);
+      await axios.post(
+        "https://blog-backend-p4he.onrender.com/api/auth/register",
+        formData
+      );
+      alert("Signup successful ✅");
+      setView("login");
+    } catch (error) {
+      alert("Signup failed ❌");
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-purple-500 to-pink-500">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-80">
-        <h2 className="text-2xl font-bold text-center mb-6">Signup</h2>
+    <form onSubmit={handleSubmit} className="form">
+      <h2>Signup</h2>
 
-        <input
-          type="text"
-          placeholder="Name"
-          className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <input name="name" placeholder="Name" onChange={handleChange} required />
+      <input name="email" placeholder="Email" onChange={handleChange} required />
+      <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <button type="submit">Signup</button>
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button
-          onClick={handleSignup}
-          className="w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600 transition"
-        >
-          Signup
-        </button>
-
-        <p className="text-sm text-center mt-4">
-          Already have an account?{" "}
-          <Link to="/login" className="text-purple-500 hover:underline">
-            Login
-          </Link>
-        </p>
-      </div>
-    </div>
+      <p className="link" onClick={() => setView("login")}>
+        Already have an account? Login
+      </p>
+    </form>
   );
 }
 
