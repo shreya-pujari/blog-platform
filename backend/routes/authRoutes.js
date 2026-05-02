@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 
 const router = express.Router();
 
-/* ================= REGISTER ================= */
+/* REGISTER */
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-/* ================= LOGIN ================= */
+/* LOGIN */
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -51,15 +51,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
-/* ================= RESET PASSWORD ================= */
+/* RESET PASSWORD */
 router.post("/reset-password", async (req, res) => {
   try {
     const { email, newPassword } = req.body;
 
-    console.log("Reset request:", email); // debug
-
     const user = await User.findOne({ email });
-
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
@@ -71,7 +68,6 @@ router.post("/reset-password", async (req, res) => {
 
     res.json({ message: "Password updated successfully" });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
